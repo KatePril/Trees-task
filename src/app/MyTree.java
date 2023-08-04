@@ -3,84 +3,56 @@ package app;
 public class MyTree {
 
     private Node root;
-
-    public MyTree() {
-    }
-
-    public MyTree(Node root) {
-        this.root = root;
+    public MyTree(int value) {
+        this.root = new Node(value);
     }
 
     public String addElement (int value) {
-        if (root == null) {
+        if (!hasRoot()) {
             root = new Node(value);
             return "Element was added successfully";
         } else if (value < root.getValue()) {
-            if (root.left == null) {
-                root.left = new Node(value);
+            if (root.hasLeft()) {
+                return goToNextNode(value, root.getLeft());
             } else {
-                goToNextNode(value, root.left);
+                root.setLeft(value);
+                return "Element was added successfully";
             }
         } else if (value > root.getValue()) {
-            if (root.right == null) {
-                root.right = new Node(value);
+            if (root.hasRight()) {
+                return goToNextNode(value, root.getRight());
             } else {
-                goToNextNode(value, root.right);
+                root.setRight(value);
+                return "Element was added successfully";
             }
         }
         return "Failed to add element";
     }
 
-    public String goToNextNode(int value, Node node) {
+    private String goToNextNode(int value, Node node) {
         if (value < node.getValue()) {
-            if (node.left == null) {
-                node.left = new Node(value);
-                return "Element was added successfully";
+            if (node.hasLeft()) {
+                goToNextNode(value, node.getLeft());
             } else {
-                goToNextNode(value, node.left);
+                node.setLeft(value);
+                return "Element was added successfully";
             }
         } else if (value > node.getValue()) {
-            if (node.right == null) {
-                node.right = new Node(value);
-                return "Element was added successfully";
+            if (node.hasRight()) {
+                goToNextNode(value, node.getRight());
             } else {
-                goToNextNode(value, node.right);
+                node.setRight(value);
+                return "Element was added successfully";
             }
         }
         return "Failed to add element";
     }
 
-    private class Node {
-        private int value;
-        private Node left;
-        private Node right;
+    public boolean hasRoot() {
+        return root != null;
+    }
 
-        public Node(int value) {
-            this.value = value;
-        }
-
-        public int getValue() {
-            return value;
-        }
-
-        public void setValue(int value) {
-            this.value = value;
-        }
-
-        public Node getLeft() {
-            return left;
-        }
-
-        public void setLeft(Node left) {
-            this.left = left;
-        }
-
-        public Node getRight() {
-            return right;
-        }
-
-        public void setRight(Node right) {
-            this.right = right;
-        }
+    public Node getRoot() {
+        return root;
     }
 }

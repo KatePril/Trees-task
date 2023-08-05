@@ -2,23 +2,10 @@ package app;
 
 public class Main {
     public static void main(String[] args) {
-        MyTree tree = new MyTree(15);
+        TreeCreator treeCreator = new TreeCreator(15);
+        treeCreator.fillTree(3, 7, 2, 4, 6, 8, 20, 17, 25, 19, 23);
 
-        System.out.println(tree.addElement(3));
-        System.out.println(tree.addElement(7));
-        System.out.println(tree.addElement(2));
-
-        System.out.println(tree.addElement(4));
-        System.out.println(tree.addElement(6));
-        System.out.println(tree.addElement(8));
-
-        System.out.println(tree.addElement(20));
-        System.out.println(tree.addElement(17));
-        System.out.println(tree.addElement(25));
-
-        System.out.println(tree.addElement(19));
-        System.out.println(tree.addElement(23));
-        System.out.println(tree.addElement(16));
+        MyTree tree = treeCreator.getTree();
 
         System.out.println();
         TreeDisplay treeDisplay = new TreeDisplay(tree);

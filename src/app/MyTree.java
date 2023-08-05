@@ -32,14 +32,14 @@ public class MyTree {
     private String goToNextNode(int value, Node node) {
         if (value < node.getValue()) {
             if (node.hasLeft()) {
-                goToNextNode(value, node.getLeft());
+                return goToNextNode(value, node.getLeft());
             } else {
                 node.setLeft(value);
                 return "Element was added successfully";
             }
         } else if (value > node.getValue()) {
             if (node.hasRight()) {
-                goToNextNode(value, node.getRight());
+                return goToNextNode(value, node.getRight());
             } else {
                 node.setRight(value);
                 return "Element was added successfully";
